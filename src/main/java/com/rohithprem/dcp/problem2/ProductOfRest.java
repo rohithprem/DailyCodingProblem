@@ -43,4 +43,5 @@ public class ProductOfRest {
         return output;
     }
 
+    //TODO: arrive at solution without division
 }
