@@ -39,4 +39,36 @@ public class AddToKTest {
         Assert.assertFalse(response);
     }
 
+    @Test
+    public void addToKWithNegativeNumbersTrue(){
+        Integer[] numbers = {-20,30,15,5};
+        int k = 10;
+        boolean response = addToK.execute(Arrays.asList(numbers), k);
+        Assert.assertTrue(response);
+    }
+
+    @Test
+    public void addToKWithNegativeNumbersFalse(){
+        Integer[] numbers = {-20,30,15,5};
+        int k = 5;
+        boolean response = addToK.execute(Arrays.asList(numbers), k);
+        Assert.assertFalse(response);
+    }
+
+    @Test
+    public void addToKWithNegativeExpectationTrue(){
+        Integer[] numbers = {-20,30,15,5};
+        int k = -5;
+        boolean response = addToK.execute(Arrays.asList(numbers), k);
+        Assert.assertTrue(response);
+    }
+
+    @Test
+    public void addToKWithNegativeExpectationFalse(){
+        Integer[] numbers = {-20,30,15,5};
+        int k = -20;
+        boolean response = addToK.execute(Arrays.asList(numbers), k);
+        Assert.assertFalse(response);
+    }
+
 }

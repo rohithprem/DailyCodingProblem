@@ -1,5 +1,6 @@
 package com.rohithprem.dcp.problem1;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,8 +20,9 @@ import java.util.List;
 
 public class AddToK {
 
-    public boolean execute(List<Integer> numbers, int k){
-
+    //n^2 iterations
+    boolean execute1(List<Integer> numbers, int k){
+        int count = 0;
         for (int i = 0 ; i < numbers.size() - 1 ; i++) {
             Integer number = numbers.get(i);
             for(int j = 0 ; j < numbers.size() ; j++){
@@ -34,6 +36,20 @@ public class AddToK {
                     }
                 }
             }
+        }
+        return false;
+    }
+
+    //One Pass?
+    //List contains is still a hinderance but much better than previous
+    boolean execute(List<Integer> numbers, int k){
+        List<Integer> completedNumbers = new ArrayList<>();
+        for(Integer number : numbers){
+            int difference = k-Math.abs(number);
+            if(completedNumbers.contains(difference)){
+                return true;
+            }
+            completedNumbers.add(number);
         }
         return false;
     }
