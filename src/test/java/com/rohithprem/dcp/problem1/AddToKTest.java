@@ -27,6 +27,17 @@ public class AddToKTest {
     private final AddToK addToK = new AddToK();
 
     @Test
+    public void addToKEmpty(){
+        Integer[] numbers = {};
+        int k = 30;
+        double start = System.currentTimeMillis();
+        boolean response = addToK.execute(Arrays.asList(numbers), k);
+        double end = System.currentTimeMillis();
+        System.out.println("Time Taken: " + (end-start));
+        Assert.assertFalse(response);
+    }
+
+    @Test
     public void addToKTrueSimple(){
         Integer[] numbers = {1,2,10,20};
         int k = 30;
