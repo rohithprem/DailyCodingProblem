@@ -18,7 +18,7 @@ import java.util.List;
 
  */
 
-public class AddToK {
+public class Problem1 {
 
     //n^2 iterations
     boolean execute1(List<Integer> numbers, int k){

@@ -14,7 +14,7 @@ package com.rohithprem.dcp.problem2;
  * Follow-up: what if you can't use division?
  */
 
-public class ProductOfRest {
+public class Problem2 {
 
     //With division
     public Integer[] executeWithDivision(Integer[] input){

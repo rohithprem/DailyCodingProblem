@@ -17,9 +17,9 @@ import org.junit.Test;
  * Follow-up: what if you can't use division?
  */
 
-public class ProductOfRestTest {
+public class Problem2Test {
 
-    private static final ProductOfRest productOfRest = new ProductOfRest();
+    private static final Problem2 productOfRest = new Problem2();
 
     @Test
     public void testProductOfRestSimpleGivenExample1(){

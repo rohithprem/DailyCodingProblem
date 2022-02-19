@@ -22,9 +22,9 @@ import java.util.Random;
  Bonus: Can you do this in one pass?
 
  */
-public class AddToKTest {
+public class Problem1Test {
 
-    private final AddToK addToK = new AddToK();
+    private final Problem1 addToK = new Problem1();
 
     @Test
     public void addToKEmpty(){
