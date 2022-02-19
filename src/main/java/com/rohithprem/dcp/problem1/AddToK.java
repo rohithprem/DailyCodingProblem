@@ -26,11 +26,9 @@ public class AddToK {
         for (int i = 0 ; i < numbers.size() - 1 ; i++) {
             Integer number = numbers.get(i);
             for(int j = 0 ; j < numbers.size() ; j++){
-                if(j == i){
-                    continue;
-                } else {
+                if(j != i){
                     Integer number2 = numbers.get(j);
-                    Integer sum = number + number2;
+                    int sum = number + number2;
                     if(sum == k){
                         return true;
                     }
