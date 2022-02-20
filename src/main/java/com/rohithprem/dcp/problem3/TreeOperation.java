@@ -53,6 +53,9 @@ public class TreeOperation {
 
     //TODO: Need to figure out how to remove extra comma
     public static String serialize(Problem3Node node){
+        if(node == null){
+            return null;
+        }
         StringBuilder stringBuilder = buildSerializedString(node);
         stringBuilder.deleteCharAt(stringBuilder.length()-1);
         return stringBuilder.toString();
@@ -73,6 +76,9 @@ public class TreeOperation {
     }
 
     public static Problem3Node deserialize(String nodeString){
+        if(nodeString == null){
+            return null;
+        }
         String[] nodeValues = nodeString.split(NODE_VALUE_SEPARATOR);
         Queue<String> nodeValuesQueue = new ArrayDeque<>(Arrays.asList(nodeValues));
         return buildNodes(nodeValuesQueue);

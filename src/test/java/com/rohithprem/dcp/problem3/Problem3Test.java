@@ -69,4 +69,28 @@ public class Problem3Test {
         Assert.assertEquals(TreeOperation.deserialize(TreeOperation.serialize(givenNode)).getLeft().getLeft().getValue(), "left.left");
     }
 
+    @Test
+    public void testNull(){
+        final String TREE_SERIAlIZED = null;
+        Problem3Node root = TreeOperation.deserialize(TREE_SERIAlIZED);
+        String serializedString = TreeOperation.serialize(root);
+        Assert.assertEquals(TREE_SERIAlIZED,serializedString);
+    }
+
+    @Test
+    public void testEmptyRoot(){
+        final String TREE_SERIAlIZED = "root,null,null";
+        Problem3Node root = TreeOperation.deserialize(TREE_SERIAlIZED);
+        String serializedString = TreeOperation.serialize(root);
+        Assert.assertEquals(TREE_SERIAlIZED,serializedString);
+    }
+
+    @Test
+    public void testInvalid(){
+        final String TREE_SERIAlIZED = "root,null";
+        Problem3Node root = TreeOperation.deserialize(TREE_SERIAlIZED);
+        String serializedString = TreeOperation.serialize(root);
+        Assert.assertEquals("root,null,null",serializedString);
+    }
+
 }
