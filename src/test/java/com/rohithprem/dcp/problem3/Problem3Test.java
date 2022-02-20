@@ -35,6 +35,11 @@ public class Problem3Test {
      *                                               |left.right.right|
      */
 
+    /**
+     * Serialization: root,left,left.left,null,null,left.right,null,left.right.right,null,null,right,null,right.right
+     */
+
+
     @Test
     public void testSerialization(){
         Problem3Node rightRight = new Problem3Node("right.right");
@@ -52,18 +57,16 @@ public class Problem3Test {
 
     @Test
     public void testDeSerialization(){
-        /*Problem3Node rightRight = new Problem3Node("right.right");
-        Problem3Node right = new Problem3Node("right", null, rightRight);
-        Problem3Node leftLeft = new Problem3Node("left.left");
-        Problem3Node leftrightright = new Problem3Node("left.right.right");
-        Problem3Node leftRight = new Problem3Node("left.right", null, leftrightright);
-        Problem3Node left = new Problem3Node("left", leftLeft, leftRight);
-        Problem3Node root = new Problem3Node("root", left, right);*/
         final String TREE_SERIAlIZED = "root,left,left.left,null,null,left.right,null,left.right.right,null,null,right,null,right.right,null,null";
         Problem3Node root = TreeOperation.deserialize(TREE_SERIAlIZED);
         String serializedString = TreeOperation.serialize(root);
-        String expected = TREE_SERIAlIZED;
-        Assert.assertEquals(expected,serializedString);
+        Assert.assertEquals(TREE_SERIAlIZED,serializedString);
+    }
+
+    @Test
+    public void testGivenExample(){
+        Problem3Node givenNode = new Problem3Node("root", new Problem3Node("left", new Problem3Node("left.left")), new Problem3Node("right"));
+        Assert.assertEquals(TreeOperation.deserialize(TreeOperation.serialize(givenNode)).getLeft().getLeft().getValue(), "left.left");
     }
 
 }

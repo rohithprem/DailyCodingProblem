@@ -1,5 +1,9 @@
 package com.rohithprem.dcp.problem3;
 
+import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Queue;
+
 /**
  * Daily Coding Problem: Problem #3 [Medium]
  * This problem was asked by Google.
@@ -19,24 +23,8 @@ package com.rohithprem.dcp.problem3;
  * node = Node('root', Node('left', Node('left.left')), Node('right'))
  * assert deserialize(serialize(node)).left.left.val == 'left.left'
  */
-
 public class TreeOperation {
 
-    /**
-     * Example Tree
-     *
-     *                                          |root|
-     *                                         /      \
-     *                                     |left|       |right|
-     *                                    /    \               \
-     *                        |left.left|   |left.right|        |right.right|
-     *                                                 \
-     *                                               |left.right.right|
-     */
-
-    /**
-     * Serialization: root,left,left.left,null,null,left.right,null,left.right.right,null,null,right,null,right.right
-     */
 
     static final String ROOT_NODE_VALUE = "root";
     static final String LEFT_NODE_VALUE = "left";
@@ -65,42 +53,40 @@ public class TreeOperation {
 
     //TODO: Need to figure out how to remove extra comma
     public static String serialize(Problem3Node node){
+        StringBuilder stringBuilder = buildSerializedString(node);
+        stringBuilder.deleteCharAt(stringBuilder.length()-1);
+        return stringBuilder.toString();
+    }
+
+    private static StringBuilder buildSerializedString(Problem3Node node){
         StringBuilder stringBuilder = new StringBuilder();
         if(node != null){
-            stringBuilder.append(NODE_VALUE_SEPARATOR + node.getValue());
-            stringBuilder.append(serialize(node.getLeft()));
-            stringBuilder.append(serialize(node.getRight()));
+            stringBuilder.append(node.getValue());
+            stringBuilder.append(NODE_VALUE_SEPARATOR);
+            stringBuilder.append(buildSerializedString(node.getLeft()));
+            stringBuilder.append(buildSerializedString(node.getRight()));
         } else {
-            stringBuilder.append(NODE_VALUE_SEPARATOR + NODE_DEADEND);
+            stringBuilder.append(NODE_DEADEND);
+            stringBuilder.append(NODE_VALUE_SEPARATOR);
         }
-        return stringBuilder.toString();
+        return stringBuilder;
     }
 
     public static Problem3Node deserialize(String nodeString){
         String[] nodeValues = nodeString.split(NODE_VALUE_SEPARATOR);
-        NodeBuilderObject response = buildNodes(nodeValues, 0);
-        return response.getBuiltNode();
+        Queue<String> nodeValuesQueue = new ArrayDeque<>(Arrays.asList(nodeValues));
+        return buildNodes(nodeValuesQueue);
     }
 
-    private static NodeBuilderObject buildNodes(String[] nodeValues, int startIndex){
-        Problem3Node node = new Problem3Node(nodeValues[startIndex]);
-        int leftValueIndex = startIndex + 1;
-        int rightValueIndex = leftValueIndex + 1;
-        String leftValue = nodeValues[leftValueIndex];
-        if(!leftValue.equals(NODE_DEADEND)){
-            NodeBuilderObject leftNodeDetails = buildNodes(nodeValues, leftValueIndex);
-            node.setLeft(leftNodeDetails.getBuiltNode());
-            rightValueIndex = leftNodeDetails.getFinalIndex() + 1;
+    private static Problem3Node buildNodes(Queue<String> nodeValues){
+        Problem3Node node = null;
+        String currentValue = nodeValues.poll();
+        if(currentValue != null && !currentValue.equals(NODE_DEADEND)){
+            node = new Problem3Node(currentValue);
+            node.setLeft(buildNodes(nodeValues));
+            node.setRight(buildNodes(nodeValues));
         }
-        String rightValue = nodeValues[rightValueIndex];
-        int finalIndex = rightValueIndex;
-        if(!rightValue.equals(NODE_DEADEND)){
-            NodeBuilderObject rightNodeDetails = buildNodes(nodeValues, rightValueIndex);
-            node.setRight(rightNodeDetails.getBuiltNode());
-            finalIndex = rightNodeDetails.getFinalIndex();
-        }
-        NodeBuilderObject response = new NodeBuilderObject(node, finalIndex);
-        return response;
+        return node;
     }
 
 
