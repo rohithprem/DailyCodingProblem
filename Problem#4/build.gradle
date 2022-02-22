@@ -7,6 +7,20 @@ repositories {
     mavenCentral()
 }
 
+sourceSets {
+    main {
+         java {
+            srcDirs = ['src']
+         }
+    }
+
+    test {
+        java {
+            srcDirs = ['test']
+        }
+    }
+}
+
 dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.13.2'
 }

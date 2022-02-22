@@ -1,5 +1,9 @@
-/.idea/
-/build/
-/.gradle/
-/gradle/
+*.idea/
+*build/
+*.gradle/
+*gradle/
 /test.txt
+*.classpath
+*.settings
+*.project
+*bin/
