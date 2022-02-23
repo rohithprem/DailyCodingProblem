@@ -1,5 +1,7 @@
 package com.rohithprem.dcp.problem4;
 
+import java.util.Arrays;
+
 /**
  * Daily Coding Problem: Problem #4 [Hard]
  * 
@@ -17,4 +19,27 @@ package com.rohithprem.dcp.problem4;
 
 public class MissingPositiveInteger {
 
+	public int execute(int[] input) {
+		Arrays.sort(input);
+		int missing = -1;
+		for (int i=0 ; i<input.length-1 ; i++) {
+			int val = input[i];
+			int nextVal = input[i+1];
+			int expectedNext = val+1;
+			if(val >= 0 && nextVal != expectedNext) {
+				missing = expectedNext;
+				break;
+			}
+		}
+		if(missing == -1) {
+			int val = input[input.length - 1];
+			if(val < 0) {
+				missing = 1;
+			} else {
+				missing = val+1;
+			}
+		}
+		return missing;
+	}
+	
 }
